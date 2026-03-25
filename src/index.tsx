@@ -30,7 +30,10 @@ function transformFlagData(raw: unknown): FlagData {
 
   const active = items.find((item) => {
     const start = item.start_date;
-    const end = item.end_date || start; // empty end_date = single day
+    // FlagWatch uses empty end_date for single-day proclamations (the common case).
+    // Do NOT treat empty end_date as open-ended — that causes stale proclamations
+    // from months ago to appear permanently active.
+    const end = item.end_date || start;
     return today >= start && today <= end;
   });
 
