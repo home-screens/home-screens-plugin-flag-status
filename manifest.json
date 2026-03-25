@@ -1,0 +1,49 @@
+{
+  "id": "flag-status",
+  "name": "US Flag Status",
+  "version": "1.0.0",
+  "description": "Displays whether the US flag is at full staff or half-staff, with the proclamation reason. Data from the FlagWatch API.",
+  "author": "home-screens",
+  "license": "MIT",
+  "minAppVersion": "0.20.0",
+  "moduleType": "flag-status",
+  "category": "Knowledge & Fun",
+  "icon": "Flag",
+
+  "defaultConfig": {
+    "showReason": true,
+    "refreshIntervalMin": 30
+  },
+
+  "defaultSize": { "w": 300, "h": 400 },
+
+  "configSchema": {
+    "type": "object",
+    "properties": {
+      "showReason": {
+        "type": "boolean",
+        "title": "Show Reason",
+        "description": "Display the proclamation reason when the flag is at half-staff",
+        "ui:widget": "toggle"
+      },
+      "refreshIntervalMin": {
+        "type": "number",
+        "title": "Refresh Interval (minutes)",
+        "minimum": 30,
+        "maximum": 120,
+        "ui:widget": "slider",
+        "ui:step": 5
+      }
+    }
+  },
+
+  "exports": {
+    "component": "default"
+  },
+
+  "dataRequirements": [],
+  "prefetchUrl": null,
+  "allowedDomains": ["flagwatch.net"],
+  "permissions": ["network"],
+  "secrets": []
+}
