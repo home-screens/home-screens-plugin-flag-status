@@ -30,8 +30,9 @@ function transformFlagData(raw: unknown): FlagData {
 
   const active = items.find((item) => {
     const start = item.start_date;
-    const end = item.end_date || start;
-    return today >= start && today <= end;
+    // Empty end_date means open-ended (e.g. "until interment") — treat as still active
+    if (!item.end_date) return today >= start;
+    return today >= start && today <= item.end_date;
   });
 
   if (active) {
@@ -53,8 +54,11 @@ function useFlagData(refreshMs: number): [FlagData | null, string | null] {
 
   React.useEffect(() => {
     let cancelled = false;
+    let inFlight = false;
 
     async function fetchData() {
+      if (inFlight) return;
+      inFlight = true;
       try {
         const res = await window.__HS_SDK__.pluginFetch(PLUGIN_ID, {
           url: FLAGWATCH_URL,
@@ -63,6 +67,7 @@ function useFlagData(refreshMs: number): [FlagData | null, string | null] {
         if (cancelled) return;
         if (res.ok) {
           const raw = await res.json();
+          if (cancelled) return;
           setData(transformFlagData(raw));
           setError(null);
         } else {
@@ -70,6 +75,8 @@ function useFlagData(refreshMs: number): [FlagData | null, string | null] {
         }
       } catch {
         if (!cancelled) setError('Failed to fetch flag status');
+      } finally {
+        inFlight = false;
       }
     }
 
