@@ -30,9 +30,8 @@ function transformFlagData(raw: unknown): FlagData {
 
   const active = items.find((item) => {
     const start = item.start_date;
-    // Empty end_date means open-ended (e.g. "until interment") — treat as still active
-    if (!item.end_date) return today >= start;
-    return today >= start && today <= item.end_date;
+    const end = item.end_date || start; // empty end_date = single day
+    return today >= start && today <= end;
   });
 
   if (active) {
