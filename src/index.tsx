@@ -151,6 +151,11 @@ function FlagVisual({ isHalfStaff }: { isHalfStaff: boolean }) {
   );
 }
 
+// Named export forces Rollup to produce an object ({ default: ... }) rather than
+// assigning the default export directly to the IIFE global. The plugin loader
+// reads window.__HS_PLUGIN__['default'], which requires the object form.
+export const pluginId = PLUGIN_ID;
+
 export default function FlagStatusPlugin({ config, style }: PluginComponentProps) {
   const showReason = config.showReason !== false;
   const refreshMin = (config.refreshIntervalMin as number) || 30;
