@@ -3,7 +3,14 @@
  * These are the props injected by the host into your display component.
  */
 
-/** Style properties applied to every module — matches the host's ModuleStyle */
+/** Style properties applied to every module — matches the host's ModuleStyle.
+ *  Keep this in sync with `ModuleStyle` in the host's src/types/config.ts: a
+ *  field missing here is a style control this plugin silently ignores, which
+ *  is exactly how borderWidth / borderColor / shadowSize went unimplemented.
+ *  The three are optional because hosts older than them omit the values.
+ *
+ *  Prefer `hostFrameStyle` from ./host-style over reading these by hand — it
+ *  applies all of them the way the host applies them to built-in modules. */
 export interface ModuleStyle {
   fontSize: number;
   fontFamily: string;
@@ -13,6 +20,9 @@ export interface ModuleStyle {
   padding: number;
   opacity: number;
   backdropBlur: number;
+  borderWidth?: number;
+  borderColor?: string;
+  shadowSize?: number;
 }
 
 /** Base props every plugin display component receives */

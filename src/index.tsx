@@ -1,5 +1,6 @@
 import React from 'react';
 import type { PluginComponentProps } from './hs-plugin';
+import { useHostFrameStyle } from './host-style';
 
 const PLUGIN_ID = 'flag-status';
 const FLAGWATCH_URL = 'https://flagwatch.net/api/v1/';
@@ -167,21 +168,7 @@ export default function FlagStatusPlugin({ config, style }: PluginComponentProps
   const [data, error] = useFlagData(refreshMs);
 
   // Module wrapper styles — plugins must apply these on the root element
-  const wrapperStyle: React.CSSProperties = {
-    width: '100%',
-    height: '100%',
-    overflow: 'hidden',
-    fontFamily: style.fontFamily,
-    fontSize: style.fontSize,
-    color: style.textColor,
-    backgroundColor: style.backgroundColor,
-    borderRadius: style.borderRadius,
-    padding: style.padding,
-    opacity: style.opacity,
-    backdropFilter: `blur(${style.backdropBlur ?? 0}px)`,
-    WebkitBackdropFilter: `blur(${style.backdropBlur ?? 0}px)`,
-    boxSizing: 'border-box',
-  };
+  const wrapperStyle: React.CSSProperties = useHostFrameStyle(style);
 
   if (data === null) {
     return (
