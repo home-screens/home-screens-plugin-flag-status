@@ -1,6 +1,6 @@
 {
   "name": "home-screens-plugin-flag-status",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "US flag half-staff status plugin for Home Screens",
   "license": "MIT",
   "scripts": {

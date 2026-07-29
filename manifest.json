@@ -1,7 +1,7 @@
 {
   "id": "flag-status",
   "name": "US Flag Status",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Displays whether the US flag is at full staff or half-staff, with the proclamation reason. Data from the FlagWatch API.",
   "author": "home-screens",
   "license": "MIT",

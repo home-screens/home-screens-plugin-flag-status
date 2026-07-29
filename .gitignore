@@ -5,3 +5,4 @@ dist/
 
 # Working docs (plans, specs, agent memory) — never committed
 .claude/
+releases/
