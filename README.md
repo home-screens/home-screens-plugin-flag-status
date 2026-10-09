@@ -2,6 +2,10 @@
 
 A plugin for [Home Screens](https://homescreens.dev) — the open-source smart display system for Raspberry Pi — that shows whether the US flag is currently at full-staff or half-staff, with the proclamation reason when applicable.
 
+| Full staff | Half staff with the reason |
+|---|---|
+| ![The flag at full staff](screenshots/full-staff.webp) | ![The flag at half staff with the proclamation reason underneath](screenshots/half-staff.webp) |
+
 ## Features
 
 - **Live full-staff / half-staff status** sourced from the public [FlagWatch API](https://flagwatch.net)
